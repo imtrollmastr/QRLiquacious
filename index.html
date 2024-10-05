@@ -1,19 +1,44 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <script>
-            function getURLParameter(params) {
-                const URLParams = new URLSearchParams(window.location.search)
-                return URLParams.get(params)
-            }
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Base64 Image</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        img {
+            max-width: 100%;
+            max-height: 100%;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <img id="base64-image" alt="Base64 Image" />
 
-            const encodedImageData = getURLParameter("data")
-            const decodedImageData = atob(encodedImageData)
-            const imageDataContainer = document.getElementById("imageData")
-            imageDataContainer.innerHTML = "<img src='" + decodedImageData + "'>"
-        </script>
-    </head>
-    <body>
-        <div id="imageData"></div>
-    </body>
+    <script>
+        // Function to get URL parameters
+        function getUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('img');
+        }
+
+        // Get the base64 image from URL parameters
+        const base64Image = getUrlParams();
+        const imgElement = document.getElementById('base64-image');
+
+        // Check if the base64 image exists and is valid
+        if (base64Image && base64Image.startsWith('data:image/')) {
+            imgElement.src = base64Image;
+        } else {
+            imgElement.alt = 'No valid image found';
+        }
+    </script>
+</body>
 </html>
