@@ -1,1 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            function getURLParameter(params) {
+                const URLParams = new URLSearchParams(window.location.search)
+                return URLParams.get(params)
+            }
 
+            const encodedImageData = getURLParameter("data")
+            const decodedImageData = atob(encodedImageData)
+            const imageDataContainer = document.getElementById("imageData")
+            imageDataContainer.innerHTML = "<img src='" + decodedImageData + "'>"
+        </script>
+    </head>
+    <body>
+        <div id="imageData"></div>
+    </body>
+</html>
